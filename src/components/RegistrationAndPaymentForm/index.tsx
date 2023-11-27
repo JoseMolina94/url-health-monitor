@@ -57,6 +57,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
 
   const validate = () => {
     const emailRegexValidator = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const cardNumberRegexValidator = /^\d+$/
     let error = errorInitialValues
     let haveError = false
 
@@ -64,49 +65,58 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
       error.firstName = "The first name is required"
       haveError = true
     }
+
     if (!formState?.lastName) {
       error.lastName = "The last name is required"
       haveError = true
     }
+
     if (!formState?.birthday) {
       error.birthday = "The birthday is required"
       haveError = true
     }
+
     if (!formState?.email || !emailRegexValidator.test(formState?.email)) {
       error.email = "You must register an e-mail address"
       haveError = true
     }
     if (isPurchasing) {
-      if (!formState?.cardNumber) {
+      if (!formState?.cardNumber || !cardNumberRegexValidator.test(formState?.cardNumber)) {
         error.cardNumber = "You must register a credit card number"
         haveError = true
-      }
-      if (formState?.cardNumber) {
-        if (formState?.cardNumber.length < 16) {
-          error.cardNumber = "The card number is too short"
-          haveError = true
+      } else {
+        if (formState?.cardNumber) {
+          if (formState?.cardNumber.length < 16) {
+            error.cardNumber = "The card number is too short"
+            haveError = true
+          }
+          else if (formState?.cardNumber.length > 16) {
+            error.cardNumber = "The card number is too long"
+            haveError = true
+          }
         }
-        else if (formState?.cardNumber.length > 16) {
-          error.cardNumber = "The card number is too long"
-          haveError = true
-        }
       }
+
       if (!formState?.cardPartner) {
         error.cardPartner = "You must register a credit card partner"
         haveError = true
       }
+
       if (!formState?.userId) {
         error.userId = "You must register a credit card owner Id"
         haveError = true
       }
+
       if (!formState?.cvv || formState?.cvv.length > 3) {
         error.cvv = "You must register the credit card CVV code"
         haveError = true
       }
+
       if (!formState?.cardExpirationMonth) {
         error.cardExpirationMonth = "You must register de credit card expiration month"
         haveError = true
       }
+
       if (!formState?.cardExpirationYear) {
         error.cardExpirationYear = "You must register de credit card expiration year"
         haveError = true
@@ -116,6 +126,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
         error.cardExpirationMonth = "Please especific the month in number, e.g: 02 (Feb)"
         haveError = true
       }
+
       if (!formState?.cardExpirationYear && formState?.cardExpirationYear.length > 2) {
         error.cardExpirationYear = "Only the last two digits are required"
         haveError = true
