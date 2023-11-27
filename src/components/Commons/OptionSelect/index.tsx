@@ -5,7 +5,7 @@ import './styles.css'
 interface OptionSelectProps {
   name: string,
   value: string,
-  onChangeFunc: (props) => void,
+  onChangeFunc: (props: any) => void,
   style?: object,
   label?: string,
   required?: boolean,
@@ -17,7 +17,7 @@ export const OptionSelect: FC<OptionSelectProps> = (props) => {
   const {
     name = "",
     value = "",
-    onChangeFunc = (props) => {},
+    onChangeFunc = (props: any) => {},
     style = {},
     label = "",
     required = false,

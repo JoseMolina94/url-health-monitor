@@ -5,7 +5,7 @@ import "./styles.css"
 interface InputProps {
   name: string,
   value: string,
-  onChangeFunc: (props) => void,
+  onChangeFunc: (props: any) => void,
   type?: string,
   style?: object,
   label?: string,
@@ -18,7 +18,7 @@ export const Input: FC <InputProps> = (props) => {
   const {
     name = "",
     value = "",
-    onChangeFunc = (props) => {},
+    onChangeFunc = (props: any) => {},
     type = "text",
     style = {},
     label = "",
