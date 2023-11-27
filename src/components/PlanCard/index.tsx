@@ -5,7 +5,7 @@ import './styles.css'
 
 interface PlanCardProps {
   plan: UrlPlan,
-  setSelectedPlan: (plan: UrlPlan) => void,
+  setSelectedPlan?: (plan: UrlPlan) => void,
   withoutChooseButton?: boolean
 }
 
