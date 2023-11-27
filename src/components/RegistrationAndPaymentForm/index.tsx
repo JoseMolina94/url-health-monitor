@@ -48,7 +48,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
   ]
   const isPurchasing = selectedPlan?.price > 0
 
-  const onChangeFunc = ({name, value}: {string, any}) => {
+  const onChangeFunc = ({name, value}: {name: string, value: any}) => {
     let currentValues = formState
     currentValues[name] = value
 
