@@ -49,10 +49,10 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
   const isPurchasing = selectedPlan?.price > 0
 
   const onChangeFunc = ({name, value}: {name: string, value: any}) => {
-    let currentValues = formState
-    currentValues[name] = value
-
-    setFormState({...currentValues})
+    setFormState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   }
 
   const validate = () => {
@@ -84,11 +84,12 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
       if (formState?.cardNumber) {
         if (formState?.cardNumber.length < 16) {
           error.cardNumber = "The card number is too short"
+          haveError = true
         }
         else if (formState?.cardNumber.length > 16) {
           error.cardNumber = "The card number is too long"
+          haveError = true
         }
-        haveError = true
       }
       if (!formState?.cardPartner) {
         error.cardPartner = "You must register a credit card partner"
