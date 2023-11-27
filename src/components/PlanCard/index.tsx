@@ -6,7 +6,7 @@ import './styles.css'
 interface PlanCardProps {
   plan: UrlPlan,
   setSelectedPlan: (plan: UrlPlan) => void,
-  withoutChooseButton: boolean
+  withoutChooseButton?: boolean
 }
 
 export const PlanCard: FC<PlanCardProps> = (props) => {
