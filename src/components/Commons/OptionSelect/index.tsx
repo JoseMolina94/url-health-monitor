@@ -10,7 +10,7 @@ interface OptionSelectProps {
   label?: string,
   required?: boolean,
   options: any[],
-  errorCtrl?: object
+  error?: string
 }
 
 export const OptionSelect: FC<OptionSelectProps> = (props) => {
@@ -22,7 +22,7 @@ export const OptionSelect: FC<OptionSelectProps> = (props) => {
     label = "",
     required = false,
     options = [],
-    errorCtrl = null
+    error = ""
   } = props
   const [inputValue, setInputValue] = useState(value)
 
@@ -63,9 +63,9 @@ export const OptionSelect: FC<OptionSelectProps> = (props) => {
         }
       </select>
       {
-        (errorCtrl && errorCtrl[name]) &&
+        error &&
         <p className="error-label">
-          {errorCtrl[name]}
+          {error}
         </p>
       }
     </div>

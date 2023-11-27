@@ -156,7 +156,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
             value={formState?.firstName}
             onChangeFunc={onChangeFunc}
             label="First Name"
-            errorCtrl={errorCtrl}
+            error={errorCtrl?.firstName}
           />
           <Input
             required
@@ -164,7 +164,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
             value={formState?.lastName}
             onChangeFunc={onChangeFunc}
             label="Last Name"
-            errorCtrl={errorCtrl}
+            error={errorCtrl?.lastName}
           />
         </div>
 
@@ -175,7 +175,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
             value={formState?.email}
             onChangeFunc={onChangeFunc}
             label="E-Mail"
-            errorCtrl={errorCtrl}
+            error={errorCtrl?.email}
           />
 
           <Input
@@ -185,7 +185,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
             value={formState?.birthday}
             onChangeFunc={onChangeFunc}
             label="Birthday"
-            errorCtrl={errorCtrl}
+            error={errorCtrl?.birthday}
           />
         </div>
 
@@ -206,7 +206,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
                   label="Credit Card Partner"
                   required
                   options={partnersOptions}
-                  errorCtrl={errorCtrl}
+                  error={errorCtrl?.cardPartner}
                 />
 
                 <Input
@@ -215,7 +215,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
                   value={formState?.cardNumber}
                   onChangeFunc={onChangeFunc}
                   label="Credit Card Number"
-                  errorCtrl={errorCtrl}
+                  error={errorCtrl?.cardNumber}
                 />
 
                 <Input
@@ -224,7 +224,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
                   value={formState?.cvv}
                   onChangeFunc={onChangeFunc}
                   label="CVV"
-                  errorCtrl={errorCtrl}
+                  error={errorCtrl?.cvv}
                 />
               </div>
 
@@ -235,7 +235,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
                   value={formState?.userId}
                   onChangeFunc={onChangeFunc}
                   label="Owner ID"
-                  errorCtrl={errorCtrl}
+                  error={errorCtrl?.userId}
                 />
 
                 <div className="card-expiration-info">
@@ -245,7 +245,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
                     value={formState?.cardExpirationMonth}
                     onChangeFunc={onChangeFunc}
                     label="Expiration Month"
-                    errorCtrl={errorCtrl}
+                    error={errorCtrl?.cardExpirationMonth}
                   />
 
                   <Input
@@ -254,7 +254,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
                     value={formState?.cardExpirationYear}
                     onChangeFunc={onChangeFunc}
                     label="Expiration Year"
-                    errorCtrl={errorCtrl}
+                    error={errorCtrl?.cardExpirationYear}
                   />
                 </div>
               </div>
