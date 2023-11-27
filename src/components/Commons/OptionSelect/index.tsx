@@ -26,7 +26,7 @@ export const OptionSelect: FC<OptionSelectProps> = (props) => {
   } = props
   const [inputValue, setInputValue] = useState(value)
 
-  const onChange = (e) => {
+  const onChange = (e: any) => {
     setInputValue(e.target.value)
   }
 
