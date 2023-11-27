@@ -9,7 +9,7 @@ import { RegistrationAndPaymentForm } from "../../components/RegistrationAndPaym
 import './styles.css'
 
 export const HomeContainer = () => {
-  const [selectedPlan, setSelectedPlan] = useState<UrlPlan>(null)
+  const [selectedPlan, setSelectedPlan] = useState<UrlPlan | null>(null)
 
   useEffect(() => {
     const formElement = document.getElementById('form');
