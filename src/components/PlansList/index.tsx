@@ -4,13 +4,13 @@ import { PlanCard } from "../PlanCard/index";
 
 interface PlansListProps {
   list: UrlPlan [],
-  setSelectedPlan: (plan) => void
+  setSelectedPlan: (plan: UrlPlan) => void
 }
 
 export const PlansList: FC<PlansListProps> = (props) => {
   const {
     list = [],
-    setSelectedPlan = (plan) => {}
+    setSelectedPlan = (plan: UrlPlan) => {}
   } = props
 
   return (

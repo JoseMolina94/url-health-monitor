@@ -5,14 +5,14 @@ import './styles.css'
 
 interface PlanCardProps {
   plan: UrlPlan,
-  setSelectedPlan: (plan) => void,
+  setSelectedPlan: (plan: UrlPlan) => void,
   withoutChooseButton: boolean
 }
 
 export const PlanCard: FC<PlanCardProps> = (props) => {
   const {
     plan,
-    setSelectedPlan = (plan) => {},
+    setSelectedPlan = (plan: UrlPlan) => {},
     withoutChooseButton = false
   } = props
 
