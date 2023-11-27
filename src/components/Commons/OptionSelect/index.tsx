@@ -9,7 +9,8 @@ interface OptionSelectProps {
   style?: object,
   label?: string,
   required?: boolean,
-  options: any[]
+  options: any[],
+  errorCtrl?: object
 }
 
 export const OptionSelect: FC<OptionSelectProps> = (props) => {
@@ -20,7 +21,8 @@ export const OptionSelect: FC<OptionSelectProps> = (props) => {
     style = {},
     label = "",
     required = false,
-    options = []
+    options = [],
+    errorCtrl = null
   } = props
   const [inputValue, setInputValue] = useState(value)
 
@@ -39,7 +41,7 @@ export const OptionSelect: FC<OptionSelectProps> = (props) => {
   return (
     <div className="select-container">
       <p className="select-label">
-        {label}
+        {label} {required && <span style={{ fontSize: "18px", color: "red" }}>*</span>}
       </p>
 
       <select
@@ -60,6 +62,12 @@ export const OptionSelect: FC<OptionSelectProps> = (props) => {
           ))
         }
       </select>
+      {
+        (errorCtrl && errorCtrl[name]) &&
+        <p className="error-label">
+          {errorCtrl[name]}
+        </p>
+      }
     </div>
   )
 }

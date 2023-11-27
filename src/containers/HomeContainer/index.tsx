@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {Banner} from "../../components/Banner/index";
 import {PlansList} from "../../components/PlansList/index";
 import {urlPlansList} from "../../constants/urlPlansData";
@@ -10,6 +10,13 @@ import './styles.css'
 
 export const HomeContainer = () => {
   const [selectedPlan, setSelectedPlan] = useState<UrlPlan>(null)
+
+  useEffect(() => {
+    const formElement = document.getElementById('form');
+    if (formElement) {
+      formElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [selectedPlan?.id])
 
   return (
     <div>
@@ -23,12 +30,14 @@ export const HomeContainer = () => {
         />
       </div>
 
-      {
-        selectedPlan &&
-        <RegistrationAndPaymentForm
-          selectedPlan={selectedPlan}
-        />
-      }
+      <div id="form">
+        {
+          selectedPlan &&
+          <RegistrationAndPaymentForm
+            selectedPlan={selectedPlan}
+          />
+        }
+      </div>
     </div>
   )
 }

@@ -18,6 +18,7 @@
 
 body {
   min-width: 250px;
+  scroll-behavior: smooth;
   /*color: rgb(var(--foreground-rgb));*/
 }
 

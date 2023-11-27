@@ -11,6 +11,7 @@ interface InputProps {
   label?: string,
   required?: boolean,
   placeholder?: string
+  errorCtrl?: object
 }
 
 export const Input: FC <InputProps> = (props) => {
@@ -22,7 +23,8 @@ export const Input: FC <InputProps> = (props) => {
     style = {},
     label = "",
     required = false,
-    placeholder = ''
+    placeholder = '',
+    errorCtrl = null
   } = props
   const [inputValue, setInputValue] = useState(value)
 
@@ -43,7 +45,7 @@ export const Input: FC <InputProps> = (props) => {
       {
         label &&
         <p className="input-label">
-          {label}
+          {label} {required && <span style={{ fontSize: "18px", color: "red" }}>*</span>}
         </p>
       }
 
@@ -68,6 +70,13 @@ export const Input: FC <InputProps> = (props) => {
             required={required}
             placeholder={placeholder}
           />
+      }
+
+      {
+        (errorCtrl && errorCtrl[name]) &&
+          <p className="error-label">
+            {errorCtrl[name]}
+          </p>
       }
     </div>
   )

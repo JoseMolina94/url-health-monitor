@@ -2,7 +2,6 @@ import React, {FC, useState} from "react";
 import { UrlPlan } from "../../interfaces/urlPlans";
 import { OptionSelect } from "../Commons/OptionSelect/index";
 import { Input } from "../Commons/Input/index";
-import { PlanTableDetails } from "../PlanTableDetails/index";
 
 import './styles.css'
 import {PlanCard} from "../PlanCard/index";
@@ -24,16 +23,30 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
     cardExpirationMonth: "",
     cardExpirationYear: "",
     userId: "",
-    cardPartner: "",
+    cardPartner: "visa",
     cvv: "",
     payment: selectedPlan?.price || 0,
     planId: selectedPlan?.id
   }
+  const errorInitialValues = {
+    firstName: "",
+    lastName: "",
+    birthday: "",
+    email: "",
+    cardNumber: "",
+    cardExpirationMonth: "",
+    cardExpirationYear: "",
+    userId: "",
+    cardPartner: "",
+    cvv: ""
+  }
   const [formState, setFormState] = useState(initialValues)
+  const [errorCtrl, setErrorCtrl] = useState<any>(null)
   const partnersOptions = [
     { label: "VISA", value: "visa" },
     { label: "MasterCard", value: "mastercard" }
   ]
+  const isPurchasing = selectedPlan?.price > 0
 
   const onChangeFunc = ({name, value}) => {
     let currentValues = formState
@@ -42,9 +55,87 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
     setFormState({...currentValues})
   }
 
+  const validate = () => {
+    const emailRegexValidator = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    let error = errorInitialValues
+    let haveError = false
+
+    if (!formState?.firstName) {
+      error.firstName = "The first name is required"
+      haveError = true
+    }
+    if (!formState?.lastName) {
+      error.lastName = "The last name is required"
+      haveError = true
+    }
+    if (!formState?.birthday) {
+      error.birthday = "The birthday is required"
+      haveError = true
+    }
+    if (!formState?.email || !emailRegexValidator.test(formState?.email)) {
+      error.email = "You must register an e-mail address"
+      haveError = true
+    }
+    if (isPurchasing) {
+      if (!formState?.cardNumber) {
+        error.cardNumber = "You must register a credit card number"
+        haveError = true
+      }
+      if (formState?.cardNumber) {
+        if (formState?.cardNumber.length < 16) {
+          error.cardNumber = "The card number is too short"
+        }
+        else if (formState?.cardNumber.length > 16) {
+          error.cardNumber = "The card number is too long"
+        }
+        haveError = true
+      }
+      if (!formState?.cardPartner) {
+        error.cardPartner = "You must register a credit card partner"
+        haveError = true
+      }
+      if (!formState?.userId) {
+        error.userId = "You must register a credit card owner Id"
+        haveError = true
+      }
+      if (!formState?.cvv || formState?.cvv.length > 3) {
+        error.cvv = "You must register the credit card CVV code"
+        haveError = true
+      }
+      if (!formState?.cardExpirationMonth) {
+        error.cardExpirationMonth = "You must register de credit card expiration month"
+        haveError = true
+      }
+      if (!formState?.cardExpirationYear) {
+        error.cardExpirationYear = "You must register de credit card expiration year"
+        haveError = true
+      }
+
+      if (formState?.cardExpirationMonth && formState?.cardExpirationMonth.length > 2) {
+        error.cardExpirationMonth = "Please especific the month in number, e.g: 02 (Feb)"
+        haveError = true
+      }
+      if (!formState?.cardExpirationYear && formState?.cardExpirationYear.length > 2) {
+        error.cardExpirationYear = "Only the last two digits are required"
+        haveError = true
+      }
+    }
+
+    setErrorCtrl(error)
+    return haveError
+  }
+
+  const onSubmit = () => {
+    if (!validate()) {
+      alert("Send!, see the console...")
+      console.log("FORM", formState)
+      setFormState(initialValues)
+    }
+  }
+
   return (
-    <div className="w-full py-10 px-10" id="form">
-      <div className="form-body py-4">
+    <div className="w-full py-10 px-10">
+      <div className="form-body form-border py-4">
 
         <div className="form-title under-line">
           <h2>
@@ -65,6 +156,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
             value={formState?.firstName}
             onChangeFunc={onChangeFunc}
             label="First Name"
+            errorCtrl={errorCtrl}
           />
           <Input
             required
@@ -72,6 +164,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
             value={formState?.lastName}
             onChangeFunc={onChangeFunc}
             label="Last Name"
+            errorCtrl={errorCtrl}
           />
         </div>
 
@@ -82,6 +175,7 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
             value={formState?.email}
             onChangeFunc={onChangeFunc}
             label="E-Mail"
+            errorCtrl={errorCtrl}
           />
 
           <Input
@@ -91,69 +185,82 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
             value={formState?.birthday}
             onChangeFunc={onChangeFunc}
             label="Birthday"
+            errorCtrl={errorCtrl}
           />
         </div>
 
-        <div className="form-title mt-6">
-          <h3>
-            User Information
-          </h3>
-        </div>
+        {
+          isPurchasing &&
+            <div className="form-body">
+              <div className="form-title mt-6">
+                <h3>
+                  Credit Card Information
+                </h3>
+              </div>
 
-        <div className="basic-card-info">
-          <OptionSelect
-          name="cardPartner"
-          value={formState?.cardPartner}
-          onChangeFunc={onChangeFunc}
-          label="Credit Card Partner"
-          required
-          options={partnersOptions}
-          />
+              <div className="basic-card-info">
+                <OptionSelect
+                  name="cardPartner"
+                  value={formState?.cardPartner}
+                  onChangeFunc={onChangeFunc}
+                  label="Credit Card Partner"
+                  required
+                  options={partnersOptions}
+                  errorCtrl={errorCtrl}
+                />
 
-          <Input
-            required
-            name="cardNumber"
-            value={formState?.cardNumber}
-            onChangeFunc={onChangeFunc}
-            label="Credit Card Number"
-          />
+                <Input
+                  required
+                  name="cardNumber"
+                  value={formState?.cardNumber}
+                  onChangeFunc={onChangeFunc}
+                  label="Credit Card Number"
+                  errorCtrl={errorCtrl}
+                />
 
-          <Input
-            required
-            name="cvv"
-            value={formState?.cvv}
-            onChangeFunc={onChangeFunc}
-            label="CVV"
-          />
-        </div>
+                <Input
+                  required
+                  name="cvv"
+                  value={formState?.cvv}
+                  onChangeFunc={onChangeFunc}
+                  label="CVV"
+                  errorCtrl={errorCtrl}
+                />
+              </div>
 
-        <div className="auth-card-info">
-          <Input
-            required
-            name="userId"
-            value={formState?.userId}
-            onChangeFunc={onChangeFunc}
-            label="Owner ID"
-          />
+              <div className="auth-card-info">
+                <Input
+                  required
+                  name="userId"
+                  value={formState?.userId}
+                  onChangeFunc={onChangeFunc}
+                  label="Owner ID"
+                  errorCtrl={errorCtrl}
+                />
 
-          <div className="card-expiration-info">
-            <Input
-              required
-              name="cardMonthExpired"
-              value={formState?.cardExpirationMonth}
-              onChangeFunc={onChangeFunc}
-              label="Expiration Month"
-            />
+                <div className="card-expiration-info">
+                  <Input
+                    required
+                    name="cardExpirationMonth"
+                    value={formState?.cardExpirationMonth}
+                    onChangeFunc={onChangeFunc}
+                    label="Expiration Month"
+                    errorCtrl={errorCtrl}
+                  />
 
-            <Input
-              required
-              name="cardYearExpired"
-              value={formState?.cardExpirationYear}
-              onChangeFunc={onChangeFunc}
-              label="Expiration Year"
-            />
-          </div>
-        </div>
+                  <Input
+                    required
+                    name="cardExpirationYear"
+                    value={formState?.cardExpirationYear}
+                    onChangeFunc={onChangeFunc}
+                    label="Expiration Year"
+                    errorCtrl={errorCtrl}
+                  />
+                </div>
+              </div>
+            </div>
+        }
+
 
         <div className="flex flex-col gap-4 justify-center items-center">
           <p className="font-extrabold text-lg text-red-600">
@@ -167,7 +274,10 @@ export const RegistrationAndPaymentForm: FC<RegistrationAndPaymentFormProps> = (
             />
           </div>
 
-          <button className="btn-purchase-plan">
+          <button
+            className="btn-purchase-plan"
+            onClick={onSubmit}
+          >
             {selectedPlan?.price > 0 ? "Purchase" : "Registry"}
           </button>
         </div>
