@@ -1,0 +1,87 @@
+.card {
+  border: 1px solid #E6E6E6;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 300px;
+  position: relative;
+  cursor: pointer;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-rows: 1fr auto;
+  background: white;
+}
+
+.card .card-body {
+  margin-top: 20px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-rows: 1fr auto auto;
+}
+
+.card .card-title {
+  position: absolute;
+  color: white;
+  padding: 5px 10px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 10px;
+  top: -25px;
+  display: flex;
+  justify-self: center;
+}
+
+.card .card-footer {
+  display: flex;
+  justify-self: flex-end;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid gray;
+  padding-top: 5px;
+  width: 100%;
+}
+
+.card .price {
+  font-size: 64px;
+  text-align: center;
+}
+
+.per-month-text {
+  font-size: 12px;
+  text-align: center;
+}
+
+.basic {
+  @apply bg-gradient-to-r from-blue-500 to-blue-700
+}
+
+.free {
+  @apply bg-gradient-to-r from-green-500 to-blue-500
+}
+
+.enterprise {
+  @apply bg-gradient-to-r from-blue-700 to-blue-900
+}
+
+.color-text-free {
+  color: green;
+}
+
+.color-text-basic {
+  color: dodgerblue;
+}
+
+.color-text-enterprise {
+  color: #1e3a8a;
+}
+
+.border-basic {
+  border-color: dodgerblue;
+}
+
+.border-free {
+  border-color: green;
+}
+
+.border-enterprise {
+  border-color: #1e3a8a;
+}

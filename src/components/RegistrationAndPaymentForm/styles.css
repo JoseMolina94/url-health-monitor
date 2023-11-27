@@ -1,0 +1,42 @@
+.form-body {
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-title {
+  display: flex;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.form-title h2 {
+  font-size: 32px;
+}
+
+.form-title h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.email-birthday-section {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+}
+
+.basic-card-info {
+  display: grid;
+  grid-template-columns: 0.35fr 1fr 0.2fr;
+}
+
+.auth-card-info {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+}
+
+.card-expiration-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

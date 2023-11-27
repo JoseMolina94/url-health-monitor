@@ -1,0 +1,19 @@
+.select {
+    font-size: 20px;
+    padding: 5px;
+    margin: 0;
+    border-radius: 10px;
+    width: 100%;
+    max-height: 40px;
+    border-width: 1px;
+    border-color: black;
+}
+
+.select-container {
+    margin: 0;
+    padding: 0 20px;
+}
+
+.select-label {
+    font-size: 18px;
+}

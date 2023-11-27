@@ -1,0 +1,10 @@
+.plans-list-container {
+  @apply flex flex-col items-center justify-center px-10 py-0 relative w-full;
+  top: -30px;
+}
+
+@media (max-width: 800px) {
+  .plans-list-container {
+    top: -20px;
+  }
+}
