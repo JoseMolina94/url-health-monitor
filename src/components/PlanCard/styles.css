@@ -50,6 +50,11 @@
   text-align: center;
 }
 
+.purchase-case-text-spacing {
+  line-height: 60px;
+  margin-top: 10px;
+}
+
 .basic {
   @apply bg-gradient-to-r from-blue-500 to-blue-700
 }

@@ -35,13 +35,7 @@ export const PlanCard: FC<PlanCardProps> = (props) => {
         </div>
 
         <div className={`color-text-${plan?.id}`}>
-          <div
-            className="price"
-            style={{
-              lineHeight: plan?.price > 0 && "60px",
-              marginTop: plan?.price > 0 && "10px"
-            }}
-          >
+          <div className={`price ${(plan?.price > 0) && "purchase-case-text-spacing"}`}>
             {plan?.price > 0 ? `${plan?.price}$` : "Free"}
           </div>
           {
