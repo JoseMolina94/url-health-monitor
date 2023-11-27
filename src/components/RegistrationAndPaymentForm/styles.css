@@ -31,7 +31,7 @@
 
 .basic-card-info {
   display: grid;
-  grid-template-columns: 0.35fr 1fr 0.2fr;
+  grid-template-columns: 300px 1fr 200px;
 }
 
 .auth-card-info {
@@ -42,4 +42,20 @@
 .card-expiration-info {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 800px) {
+  .email-birthday-section, .auth-card-info, .basic-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 350px) {
+  .card-expiration-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 }
