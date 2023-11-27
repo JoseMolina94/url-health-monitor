@@ -1,6 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 
-export const NavBar = ({children}) => {
+interface NavBarProps {
+  children: any
+}
+
+export const NavBar: FC <NavBarProps> = ({children}) => {
 
   return (
     <div>
